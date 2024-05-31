@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/globals.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { cn } from "@/lib/utils";
+import QueryProvider from "@/lib/reactQuery/QueryProvider";
+import SideMenu from "@/components/SideMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body style={{ backgroundColor: "#42699E" }} className={inter.className}>{children}</body>
+      <body className={`${inter.className} flex`}>
+        {/* <QueryProvider> */}
+        {children}
+        {/* </QueryProvider> */}
+      </body>
     </html>
   );
 }

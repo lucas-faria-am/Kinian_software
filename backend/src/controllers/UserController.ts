@@ -2,10 +2,12 @@ import { Request, Response } from "express";
 import { prisma } from "../database";
 import { User } from "@prisma/client";
 import { NotFoundError } from "../helpers/api-erros";
+// import bcrypt from "bcrypt";
 
 class UserController {
     async create(req: Request, res: Response) {
         const user: User = req.body;
+
         const userExist = await prisma.user.findUnique({
             where: {
                 email: user.email,
@@ -13,7 +15,7 @@ class UserController {
         });
 
         if (userExist) {
-            return res.json({
+            return res.status(400).json({
                 message: "Erro: Usuário já existe!",
             });
         }
@@ -27,11 +29,11 @@ class UserController {
     }
 
     async findAll(req: Request, res: Response) {
-        const users = await prisma.user.findMany();
+        const user = await prisma.user.findMany();
 
         return res.json({
             message: "Sucesso: Usuários encontrados!",
-            users,
+            user,
         });
     }
 
@@ -43,8 +45,6 @@ class UserController {
         if (!user) {
             throw new NotFoundError("Usuário não encontrado!");
         }
-        console.log(`\nUser:${id}\n`);
-        console.log(user);
         return res.json({
             message: "Sucesso: Usuário encontrado!",
             user,
@@ -54,42 +54,43 @@ class UserController {
     async update(req: Request, res: Response) {
         const { id } = req.params;
         const data: User = req.body;
-        const user = await prisma.user.findUnique({
+
+        const userExist = await prisma.user.findUnique({
             where: { id: Number(id) },
         });
 
-        if (!user) {
+        if (!userExist) {
             throw new NotFoundError("Usuário não encontrado!");
         }
 
-        const userUpdated = await prisma.user.update({
+        const user = await prisma.user.update({
             where: { id: Number(id) },
             data: data,
         });
 
         return res.json({
             message: "Sucesso: Usuário atualizado!",
-            userUpdated,
+            user,
         });
     }
 
     async delete(req: Request, res: Response) {
         const { id } = req.params;
-        const user = await prisma.user.findUnique({
+        const userExist = await prisma.user.findUnique({
             where: { id: Number(id) },
         });
 
-        if (!user) {
+        if (!userExist) {
             throw new NotFoundError("Usuário não encontrado!");
         }
 
-        const userDeleted = await prisma.user.delete({
+        const user = await prisma.user.delete({
             where: { id: Number(id) },
         });
 
         return res.json({
             message: "Sucesso: Usuário deletado",
-            userDeleted,
+            user,
         });
     }
 }

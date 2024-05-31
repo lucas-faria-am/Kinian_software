@@ -1,10 +1,12 @@
 import "express-async-errors";
-import Express from "express";
+import express from "express";
 import routes from "./routes";
 import { errorMiddleware } from "./middlewares/erro";
+import cors from "cors";
 
-const app = Express();
-app.use(Express.json());
+const app = express();
+app.use(cors());
+app.use(express.json());
 const PORT = 8000;
 
 app.use(routes);
