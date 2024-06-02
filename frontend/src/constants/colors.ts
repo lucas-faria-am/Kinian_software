@@ -1,4 +1,4 @@
-export const THEME = {
+export const COLORS = {
     /**
      * Text white
      */

@@ -1,7 +1,7 @@
 import { BadgeDollarSign, CalendarDays, HandCoins, LayoutDashboard, LogOut, Users } from "lucide-react"
 import Link from "next/link"
 import MenuItem from "./menuItem"
-import { THEME } from "@/theme"
+import { COLORS } from "@/constants/colors"
 
 export default function SideMenu() {
     const menuItems = [
@@ -32,14 +32,14 @@ export default function SideMenu() {
         }
     ]
     return (
-        <main className={`flexh-screen w-1/4 bg-[${THEME.BACKGROUND_DEFAULT}] text-slate-50 px-4`}>
+        <main className={`flexh-screen w-1/4 bg-COLORS-BACKGROUND_UI text-COLORS-TEXT_WHITE px-4`}>
             <div className="flex items-center gap-5 mb-5 p-5">
                 <div className="flex flex-col">
                     <span className="font-medium">Lucas</span>
                     <span className="text-xs">Administrador</span>
                 </div>
             </div>
-            <ul className="text-slate-50">
+            <ul>
                 {menuItems.map(item => (
                     <li key={item.title}>
                         <MenuItem item={item} />
@@ -48,7 +48,7 @@ export default function SideMenu() {
                 }
             </ul>
             <div className="flex items-center absolute bottom-0">
-                <div className="flex gap-5 mb-5 p-5">
+                <div className="flex gap-[10px] mb-6 px-5">
                     <LogOut className="-rotate-180" />
                     <span>Sair</span>
                 </div>

@@ -2,10 +2,10 @@ import { UserProps } from "@/@types/UserProps";
 import { deleteUser, getAll } from "@/api/useUserApi";
 import Container from "@/components/Container";
 import { cn } from "@/lib/utils";
-import { THEME } from "@/theme";
 import { FilePenLine, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
+import { COLORS } from "@/constants/colors";
 
 
 export default async function Usuarios() {
@@ -13,20 +13,19 @@ export default async function Usuarios() {
 
     return (
         <Container>
-            <div className={`flex h-screen w-full items-center flex-col text-[${THEME.TEXT_COLOR}]`}>
+            <div className={`flex h-screen w-full items-center flex-col text-COLORS-TEXT_WHITE`}>
                 <div className="flex flex-col items-center bg-[#23304F] w-[95%] p-4 rounded-lg shadow-2xl gap-2 mt-24">
                     <Toaster />
                     <h1 className="font-semibold text-lg">Usuario cadastrados</h1>
                     <div className="flex w-full justify-end pb-1 ">
                         <Link
-                            className={`rounded-lg p-2 my-1 bg-[${THEME.BTN_DEFAULT}] font-bold
+                            className={`rounded-lg p-2 my-1 bg-COLORS-BTN_DEFAULT font-bold
                             hover:bg-opacity-80 shadow-2xl `}
                             href={"usuario/cadastrar/"}>Casdastrar novo usuário
                         </Link>
                     </div>
                     <table
-                        className=" 
-                    w-full rounded-md"
+                        className="w-full rounded-md"
                     >
                         <thead>
                             <tr className="  size-10">
