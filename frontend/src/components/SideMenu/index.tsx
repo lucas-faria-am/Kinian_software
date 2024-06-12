@@ -1,9 +1,15 @@
 import { BadgeDollarSign, CalendarDays, HandCoins, LayoutDashboard, LogOut, Users } from "lucide-react"
-import Link from "next/link"
 import MenuItem from "./menuItem"
-import { COLORS } from "@/constants/colors"
+import { logout } from "@/api/lougout"
+import Logout from "./logout"
 
-export default function SideMenu() {
+export default async function SideMenu() {
+    // const { user }  = await auth();
+
+    const handleLogout = async () => {
+        "use server"
+        // signOut();
+    }
     const menuItems = [
         {
             title: "Dashboard",
@@ -47,11 +53,8 @@ export default function SideMenu() {
                 ))
                 }
             </ul>
-            <div className="flex items-center absolute bottom-0">
-                <div className="flex gap-[10px] mb-6 px-5">
-                    <LogOut className="-rotate-180" />
-                    <span>Sair</span>
-                </div>
+            <div className="flex items-center absolute w-[18%] py-6 bottom-2 hover:bg-[#5d6679]/40 rounded-xl">
+                <Logout />
             </div>
         </main >
 

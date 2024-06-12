@@ -1,10 +1,21 @@
-import { ENV } from "@/environments";
+import { URL } from "@/constants/apiUrl";
+import { AUTH } from "@/constants/auth";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function fetchWrapper(
     input: RequestInfo | URL,
-    init?: RequestInit | undefined
+    init?: RequestInit
 ) {
-    const data = await fetch(`${ENV.BASE_URL}/${input}`, init);
+    const token = cookies().get(AUTH.COOKIE_TOKEN)?.value;
 
-    return data;
+    const res = await fetch(`${URL.BASE_URL}/${input}`, {
+        ...init,
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+    });
+
+    return res;
 }

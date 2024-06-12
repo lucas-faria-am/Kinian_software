@@ -1,17 +1,10 @@
 import SideMenu from "@/components/SideMenu";
 
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body>
-        <SideMenu />
-        {children}
-      </body>
-    </html>
-  );
+export default function PrivateLayout({ children }: { children: React.ReactElement }) {
+    return (
+        <main className="flex">
+            <SideMenu />
+            {children}
+        </main>
+    )
 }

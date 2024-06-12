@@ -23,8 +23,36 @@ model User {
   estado String
   cidade String
   bairro String
+  role String
   oferta Oferta[]
   @@map("users")
+}
+
+model Conta {
+  id Int @id @default(autoincrement())
+  descricao String?
+  saldo Float
+  receita Receitas[]
+  oferta Despesas[]
+  @@map("conta")
+}
+
+model Despesas {
+  id Int @id @default(autoincrement())
+  descricao String?
+  valor Float
+  contaId Int
+  autor Conta @relation(fields: [contaId], references: [id])
+  @@map("despesas")
+}
+
+model Receitas {
+  id Int @id @default(autoincrement())
+  descricao String?
+  valor Float
+  contaId Int
+  autor Conta @relation(fields: [contaId], references: [id])
+  @@map("receitas")
 }
 
 model Oferta {

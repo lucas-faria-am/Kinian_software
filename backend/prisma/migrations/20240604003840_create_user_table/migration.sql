@@ -1,14 +1,14 @@
 -- CreateTable
 CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
-    "nome" TEXT,
-    "email" TEXT,
-    "senha" TEXT,
-    "celular" TEXT,
-    "dataNasc" TEXT,
-    "estado" TEXT,
-    "cidade" TEXT,
-    "bairro" TEXT,
+    "nome" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "senha" TEXT NOT NULL,
+    "celular" TEXT NOT NULL,
+    "dataNasc" TEXT NOT NULL,
+    "estado" TEXT NOT NULL,
+    "cidade" TEXT NOT NULL,
+    "bairro" TEXT NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );

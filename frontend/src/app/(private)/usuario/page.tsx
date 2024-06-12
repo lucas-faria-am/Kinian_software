@@ -1,11 +1,10 @@
 import { UserProps } from "@/@types/UserProps";
-import { deleteUser, getAll } from "@/api/useUserApi";
+import { deleteUser, getAll } from "@/api/UserApi";
 import Container from "@/components/Container";
-import { cn } from "@/lib/utils";
 import { FilePenLine, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
-import { COLORS } from "@/constants/colors";
+import ExcluirUser from "./components/excluirUser";
 
 
 export default async function Usuarios() {
@@ -19,9 +18,9 @@ export default async function Usuarios() {
                     <h1 className="font-semibold text-lg">Usuario cadastrados</h1>
                     <div className="flex w-full justify-end pb-1 ">
                         <Link
-                            className={`rounded-lg p-2 my-1 bg-COLORS-BTN_DEFAULT font-bold
+                            className={`rounded-lg p-2 my-1 bg-COLORS-BTN_BLUE font-bold
                             hover:bg-opacity-80 shadow-2xl `}
-                            href={"usuario/cadastrar/"}>Casdastrar novo usuário
+                            href={"usuario/cadastro/"}>Casdastrar novo usuário
                         </Link>
                     </div>
                     <table
@@ -37,6 +36,12 @@ export default async function Usuarios() {
                             </tr>
                         </thead>
                         <tbody>
+                            {!users && <tr>
+                                <td colSpan={5}
+                                    className="text-center text-COLORS-TEXT_WHITE font-medium pt-6">
+                                    Não há usuários cadastrados
+                                </td>
+                            </tr>}
                             {users && users.map((user) => (
                                 <tr
                                     key={user.id}
@@ -49,7 +54,7 @@ export default async function Usuarios() {
                                     <td >
                                         <div className="flex justify-center p-1">
                                             <Link href={`usuario/alterar/${user.id}`}
-                                                className="bg-green-600 w-20 flex justify-center  p-0.5 rounded-md"
+                                                className="bg-green-600 w-20 flex justify-center p-0.5 rounded-md"
                                             >
                                                 <FilePenLine size={25} className="mr-1" />
                                                 Editar
@@ -58,7 +63,8 @@ export default async function Usuarios() {
                                         </div>
                                     </td>
                                     <td>
-                                        <form action={deleteUser} className="flex justify-center p-1">
+                                        <ExcluirUser user={user} />
+                                        {/* <form action={deleteUser} className="flex justify-center p-1">
                                             <input type="hidden" name="id" value={user.id} />
                                             <button
                                                 className="flex w-20 justify-center bg-red-900 rounded-md p-0.5"
@@ -66,9 +72,8 @@ export default async function Usuarios() {
                                                 <Trash2 size={25} className="mr-1" />
                                                 Excluir
 
-                                                {/* <i className="bi bi-trash3"></i> */}
-                                            </button>
-                                        </form>
+                                            </button> */}
+                                        {/* </form> */}
                                     </td>
                                 </tr>
                             ))}

@@ -8,4 +8,5 @@ export type UserProps = {
     estado: string;
     cidade: string;
     bairro: string;
+    role: string;
 };

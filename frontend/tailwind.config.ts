@@ -23,6 +23,7 @@ const config = {
                     TEXT_WHITE: "#f8fafc",
                     BTN_BLUE: "#1E5CD9",
                     BACKGROUND_UI: "#23304F",
+                    ERROR_TEXT: "#ff5261",
                 },
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",

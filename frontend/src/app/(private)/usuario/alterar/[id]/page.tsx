@@ -1,10 +1,14 @@
-import { getOne } from "@/api/useUserApi";
-import CadForm from "../../components/CadForm";
-import Link from "next/link";
+import { getOne } from "@/api/UserApi";
 import Container from "@/components/Container";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import CadForm from "../../components/CadForm";
 
 export default async function CadEdit({ params }: { params: { id: string } }) {
     const data = await getOne(params.id);
+    // if (!data) {
+    //     redirect("/usuario");
+    // }
     return (
         <Container>
             <>
