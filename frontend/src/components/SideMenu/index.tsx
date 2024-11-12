@@ -2,17 +2,16 @@ import { BadgeDollarSign, CalendarDays, HandCoins, LayoutDashboard, LogOut, User
 import MenuItem from "./menuItem"
 import { logout } from "@/api/lougout"
 import Logout from "./logout"
+import { getProfile } from "@/api/UserApi"
+import { UserProps } from "@/@types/UserProps"
 
 export default async function SideMenu() {
-    // const { user }  = await auth();
+    const data = await getProfile();
+    const user = data.user as UserProps;
 
-    const handleLogout = async () => {
-        "use server"
-        // signOut();
-    }
     const menuItems = [
         {
-            title: "Dashboard",
+            title: "Visão geral",
             path: "/dashboard",
             icon: <LayoutDashboard />
         },
@@ -38,25 +37,28 @@ export default async function SideMenu() {
         }
     ]
     return (
-        <main className={`flexh-screen w-1/4 bg-COLORS-BACKGROUND_UI text-COLORS-TEXT_WHITE px-4`}>
-            <div className="flex items-center gap-5 mb-5 p-5">
-                <div className="flex flex-col">
-                    <span className="font-medium">Lucas</span>
-                    <span className="text-xs">Administrador</span>
+        <main className={`flex flex-col h-screen w-1/4 bg-COLORS-BACKGROUND_UI text-COLORS-TEXT_WHITE`}>
+            <div className="flex items-center px-9 py-3">
+                <div className="flex flex-col gap-1">
+                    <span className="font-semibold text-[23px]">{user.nome}</span>
+                    <span className="text-sm">{user.email}</span>
                 </div>
             </div>
-            <ul>
-                {menuItems.map(item => (
-                    <li key={item.title}>
-                        <MenuItem item={item} />
-                    </li>
-                ))
-                }
-            </ul>
-            <div className="flex items-center absolute w-[18%] py-6 bottom-2 hover:bg-[#5d6679]/40 rounded-xl">
-                <Logout />
+            <div className="border-t-4 border-slate-600 mb-2"></div>
+            <div className="px-4">
+                <ul>
+                    {menuItems.map(item => (
+                        <li key={item.title}>
+                            <MenuItem item={item} />
+                        </li>
+                    ))
+                    }
+                </ul>
+                <div className="flex items-center absolute w-[18%] py-6 bottom-2 hover:bg-[#5d6679]/40 rounded-xl">
+                    <Logout />
+                </div>
             </div>
-        </main >
+        </main>
 
     )
 }

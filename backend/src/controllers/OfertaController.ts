@@ -8,8 +8,8 @@ class OfertaController {
         const result = await prisma.oferta.create({
             data: oferta,
         });
-        return res.json({
-            message: "Sucesso: Oferta realizada!",
+        return res.status(201).json({
+            message: "Sucesso: Oferta concluída!",
             result,
         });
     }

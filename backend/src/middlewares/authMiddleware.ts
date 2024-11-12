@@ -17,19 +17,15 @@ export const authMiddleware = async (
     if (!authorization) {
         throw new UnauthorizedError("Não autorizado");
     }
-    console.log("authorization", authorization);
 
     const token = authorization.split(" ")[1];
-    console.log("token: " + token);
 
     try {
         const { id } = jwt.verify(token, process.env.JWT_PASS!) as JwtPayload;
-        console.log("id: ", id);
 
         const user = await prisma.user.findUnique({
             where: { id: Number(id) },
         });
-        console.log("user", user);
 
         if (!user) {
             throw new UnauthorizedError("Não autorizado");
@@ -39,9 +35,7 @@ export const authMiddleware = async (
             if (
                 PRIVATE_ROUTES.ADMIN.some((route) => pahtname.startsWith(route))
             ) {
-                console.log("true");
-
-                console.log("Admin");
+                console.log("\nAdmin: permitido\n");
             } else {
                 throw new UnauthorizedError("Não autorizado");
             }
@@ -53,7 +47,7 @@ export const authMiddleware = async (
                     pahtname.startsWith(route)
                 )
             ) {
-                console.log("Member");
+                console.log("Member: Permitido");
             } else {
                 throw new UnauthorizedError("Não autorizado");
             }

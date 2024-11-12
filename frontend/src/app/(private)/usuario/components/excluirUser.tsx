@@ -1,6 +1,6 @@
 "use client"
 import { UserProps } from '@/@types/UserProps'
-import { deleteUser } from '@/api/UserApi'
+import { deleteUser, getProfile } from '@/api/UserApi'
 import { Trash2 } from 'lucide-react'
 import React from 'react'
 import toast from 'react-hot-toast'
@@ -10,7 +10,15 @@ type Props = {
 }
 
 export default function ExcluirUser(props: Props) {
-    const handleToast = () => {
+    const handleToast = async () => {
+
+        const data = await getProfile();
+
+        if (data.user.id == props.user.id) {
+            return toast.error("Você não pode deletar sua própria conta!", {
+                id: "deleteError"
+            });
+        }
 
         toast(
             (t) => (
@@ -23,8 +31,12 @@ export default function ExcluirUser(props: Props) {
                     <div className="flex gap-1 justify-between">
                         <button className='bg-red-900 rounded-xl p-2' onClick={async () => {
                             const res = await deleteUser(props.user.id!);
+
                             toast.success(res.message, {
                                 id: t.id,
+                                style: {
+                                    backgroundColor: "#ffffff"
+                                },
                                 duration: 3000
                             });
                         }
@@ -38,8 +50,8 @@ export default function ExcluirUser(props: Props) {
                 style: {
                     backgroundColor: "#272727"
                 },
-                duration: 15000,
-                id: "ToastDelete"
+                id: "ToastDelete",
+                duration: 30000
             },
         )
     }

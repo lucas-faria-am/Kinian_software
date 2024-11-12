@@ -4,7 +4,9 @@ import CadForm from "../components/CadForm";
 export default function CadEdit() {
     return (
         <Container>
-            <CadForm />
+            <div className="flex justify-center items-center h-full">
+                <CadForm />
+            </div>
         </Container>
     )
 }

@@ -1,7 +1,6 @@
 import { URL } from "@/constants/apiUrl";
 import { AUTH } from "@/constants/auth";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export async function fetchWrapper(
     input: RequestInfo | URL,

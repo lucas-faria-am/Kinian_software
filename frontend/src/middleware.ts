@@ -17,12 +17,12 @@ export async function middleware(request: NextRequest) {
     }
 
     if (userToken) {
-        const res = await getProfile();
+        const user = await getProfile();
 
         if (request.nextUrl.pathname === "/") {
-            return NextResponse.next();
+            return NextResponse.redirect(loggedURL);
         }
-        if (!res) {
+        if (!user) {
             const newResponse = NextResponse.redirect(signURL);
             newResponse.cookies.delete(AUTH.COOKIE_TOKEN);
             return newResponse;
@@ -37,6 +37,7 @@ export async function middleware(request: NextRequest) {
         ) {
             return NextResponse.next();
         }
+
         return NextResponse.redirect(loggedURL);
     }
 }
@@ -44,12 +45,3 @@ export async function middleware(request: NextRequest) {
 export const config = {
     matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
-// matcher: [
-//     "/",
-//     "/dashboard:path*",
-//     "/usuario:path*",
-//     "/usuario/alterar:path*",
-//     "/eventos:path*",
-//     "/financas:path*",
-//     "/dizimoOferta:path*",
-// ],

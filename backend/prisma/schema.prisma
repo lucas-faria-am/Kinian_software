@@ -32,27 +32,37 @@ model Conta {
   id Int @id @default(autoincrement())
   descricao String?
   saldo Float
-  receita Receitas[]
-  oferta Despesas[]
+  receitas Receita[]
+  despesas Despesa[]
   @@map("conta")
 }
 
-model Despesas {
+model Despesa {
   id Int @id @default(autoincrement())
   descricao String?
   valor Float
   contaId Int
+  data DateTime
   autor Conta @relation(fields: [contaId], references: [id])
   @@map("despesas")
 }
 
-model Receitas {
+
+model Receita {
   id Int @id @default(autoincrement())
   descricao String?
   valor Float
   contaId Int
-  autor Conta @relation(fields: [contaId], references: [id])
+  data DateTime
+  autor Conta? @relation(fields: [contaId], references: [id])
   @@map("receitas")
+}
+
+model Evento {
+  id Int @id @default(autoincrement())
+  descricao String?
+  data DateTime
+  @@map("eventos")
 }
 
 model Oferta {
@@ -61,6 +71,7 @@ model Oferta {
   nome String
   mensagem String?
   valor Float
+  data DateTime
   userId Int
   autor User @relation(fields: [userId], references: [id])
   @@map("ofertas")

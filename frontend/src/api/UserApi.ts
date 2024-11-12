@@ -3,12 +3,8 @@
 import { UserProps } from "@/@types/UserProps";
 import { fetchWrapper } from "@/functions/fetchWrapper";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import toast from "react-hot-toast";
 
 export const create = async (data: UserProps) => {
-    console.log(data);
-
     const res = await fetchWrapper("user/register", {
         method: "POST",
         body: JSON.stringify(data),
@@ -17,7 +13,6 @@ export const create = async (data: UserProps) => {
     const user = await res.json();
 
     if (res.status == 400) {
-        console.log(user.message);
         return { success: false, message: user.message };
     }
     if (res.status == 201) {
@@ -80,6 +75,7 @@ export const deleteUser = async (id: string) => {
     const res = await fetchWrapper(`user/${id}`, {
         method: "DELETE",
     });
+
     const result = await res.json();
 
     revalidatePath("/usuario");

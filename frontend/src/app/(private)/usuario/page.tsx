@@ -13,14 +13,14 @@ export default async function Usuarios() {
     return (
         <Container>
             <div className={`flex h-screen w-full items-center flex-col text-COLORS-TEXT_WHITE`}>
-                <div className="flex flex-col items-center bg-[#23304F] w-[95%] p-4 rounded-lg shadow-2xl gap-2 mt-24">
-                    <Toaster />
+                <div style={{ overflowY: 'auto', height: 550 }}
+                    className="flex flex-col items-center bg-[#23304F] w-[95%] p-4 rounded-lg shadow-2xl gap-2 mt-24">
                     <h1 className="font-semibold text-lg">Usuario cadastrados</h1>
                     <div className="flex w-full justify-end pb-1 ">
                         <Link
                             className={`rounded-lg p-2 my-1 bg-COLORS-BTN_BLUE font-bold
                             hover:bg-opacity-80 shadow-2xl `}
-                            href={"usuario/cadastro/"}>Casdastrar novo usuário
+                            href={"usuario/cadastro/"}>Novo usuário
                         </Link>
                     </div>
                     <table
@@ -64,16 +64,6 @@ export default async function Usuarios() {
                                     </td>
                                     <td>
                                         <ExcluirUser user={user} />
-                                        {/* <form action={deleteUser} className="flex justify-center p-1">
-                                            <input type="hidden" name="id" value={user.id} />
-                                            <button
-                                                className="flex w-20 justify-center bg-red-900 rounded-md p-0.5"
-                                            >
-                                                <Trash2 size={25} className="mr-1" />
-                                                Excluir
-
-                                            </button> */}
-                                        {/* </form> */}
                                     </td>
                                 </tr>
                             ))}

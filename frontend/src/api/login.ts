@@ -38,6 +38,12 @@ export const login = async (data: FormLoginProps) => {
                 user,
             };
         }
+        if (result.status === 500) {
+            return {
+                error: true,
+                message: "Ops: Servidor está offline!",
+            };
+        }
         return {
             error: true,
             message: "Usuário ou senha inválidos",

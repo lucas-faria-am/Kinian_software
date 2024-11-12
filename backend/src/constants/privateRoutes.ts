@@ -6,6 +6,9 @@ export const PRIVATE_ROUTES = {
         "/test",
         "/despesa",
         "/receita",
+        "/oferta",
+        "/conta",
+        "/evento",
     ],
-    MEMBER: ["/oferta", "/user/profile", "/test"],
+    MEMBER: ["/oferta", "/user/profile", "/test", "/evento/findAll"],
 };
